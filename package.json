@@ -1,0 +1,20 @@
+{
+    "name": "com.maraimarai.powderbox",
+    "version": "1.0.0",
+    "displayName": "weird-powder-box",
+    "description": "fun fun 🎠various addons and snippet ",
+    "samples": [
+      {
+        "displayName": "fluffy sample pack",
+        "description": "description for the sample pack",
+        "path": "Samples/samplepack1"
+      }
+    ],
+    "keywords": [
+      "wow"
+    ],
+    "author": {
+      "name": "marai marai",
+      "url": "https://www.spacejam.com/"
+    }
+  }
