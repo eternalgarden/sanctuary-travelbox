@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PowderBox.PostProcessing;
 
 namespace PowderBox.Audio
 {
@@ -12,7 +13,7 @@ namespace PowderBox.Audio
         [ColorUsageAttribute(false, true)] public Color inactiveColor;
         [SerializeField] bool useDefaultColorOnInactive;
         [ColorUsageAttribute(false, true)] public Color activeColor;
-        [SerializeField] PostProcessingOne mainDepthPostProcess;
+        [SerializeField] BlitMaterial mainDepthPostProcess;
 
         Color defaultColor;
 

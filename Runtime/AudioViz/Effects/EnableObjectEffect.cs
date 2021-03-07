@@ -10,7 +10,7 @@ namespace PowderBox.Audio
         [SerializeField] GameObject rootObject;
         [SerializeField] GameObject followedSpirit;
 
-        [Settings("References")]
+        [Header("References")]
         [SerializeField] bool startsEnabled;
 
         // TODO
