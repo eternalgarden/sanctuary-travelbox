@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PowderBox
+namespace PowderBox.Extensions
 {
     public static class CollectionExtensions
     {

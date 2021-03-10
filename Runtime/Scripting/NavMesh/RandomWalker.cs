@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static PowderBox.CollectionExtensions;
+using static PowderBox.Extensions.CollectionExtensions;
 
 namespace PowderBox
 {

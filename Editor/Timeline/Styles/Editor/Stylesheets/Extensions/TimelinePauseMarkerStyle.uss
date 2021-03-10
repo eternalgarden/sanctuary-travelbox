@@ -1,0 +1,6 @@
+TimeMarker
+{
+   width:16px;
+   height:16px;
+   background-image: resource("Packages/com.maraimarai.powderbox/Editor/EditorAssets/stopwatch.png");
+}
