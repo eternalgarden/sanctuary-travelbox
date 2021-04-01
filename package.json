@@ -5,9 +5,9 @@
     "description": "fun fun 🎠various addons and snippet ",
     "samples": [
       {
-        "displayName": "fluffy sample pack",
-        "description": "description for the sample pack",
-        "path": "Samples/samplepack1"
+        "displayName": "Fonts",
+        "description": "A collection of fonts with their TMPro SDF versions",
+        "path": "Samples~/Fonts"
       }
     ],
     "keywords": [
