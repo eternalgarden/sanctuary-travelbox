@@ -13,7 +13,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PowderBox.Timeline.Editor
+namespace PowderBox.Timeline
 {
     [CustomEditor(typeof(AnimatorTriggerMarker))]
     [CanEditMultipleObjects]
