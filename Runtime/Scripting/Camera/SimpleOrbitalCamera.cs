@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class SimpleOrbitalCamera : MonoBehaviour
 {
+    [Header("Dependencies")]
     public Transform target;
 
+    [Header("Settings")]
     public float offsetSpeed = 2f;
     public float distance = 10f;
     public float offsetY = 2;
     public float rotateSpeed = 20f;
+    [ReadOnly] public float rotationTime;
 
     float xSpeed = 100;
     float ySpeed = 100;
 
     float x;
     float y;
-
-
-    // float somefactor = 0.2f;
 
     void Start()
     {
@@ -27,23 +28,29 @@ public class SimpleOrbitalCamera : MonoBehaviour
         y = angles.y;
     }
 
+    void OnValidate()
+    {
+        if (Time.timeScale == 1.0)
+        {
+            float rotationDelta = ySpeed * rotateSpeed / 100 * Time.fixedDeltaTime;
+            // rotationTime 
+        }
+        else
+        {
+            rotationTime = -1.0f;
+        }
+    }
+
     void Update()
     {
         if (target)
         {
-            // x += xSpeed * somefactor * Time.deltaTime;
-            y += ySpeed * rotateSpeed / 100 * Time.deltaTime;
-
-            Quaternion rotation = Quaternion.Euler(x,y,0);
-
-            // Vector3 position = rotation * new Vector3(0,0,-distance) + target.position;
-
+            float rotationDelta = ySpeed * rotateSpeed / 100 * Time.deltaTime;
+            y += rotationDelta;
+            Quaternion rotation = Quaternion.Euler(x, y, 0);
             transform.rotation = rotation;
-            
             Vector3 position = -transform.forward * distance + target.position;
-
             position.y += offsetY;
-            
             transform.position = position;
         }
         
