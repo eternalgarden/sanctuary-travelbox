@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni042E" format="2">
+	<advance width="800"/>
+	<unicode hex="042E"/>
+	<outline>
+		<component base="_part.3" yOffset="-200"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-150" yOffset="350"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-350" yOffset="350"/>
+		<component base="_part.3" yScale="-1" yOffset="900"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-150" yOffset="350"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-350" yOffset="350"/>
+		<component base="_part.3" xScale="-1" xOffset="800" yOffset="200"/>
+		<component base="_part.7" xScale="-1" xOffset="800"/>
+		<component base="_part.3" xScale="-1" xOffset="800" yOffset="-400"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="750"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="350"/>
+	</outline>
+</glyph>

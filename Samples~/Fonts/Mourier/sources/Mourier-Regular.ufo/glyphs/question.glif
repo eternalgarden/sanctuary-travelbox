@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="question" format="2">
+	<advance width="800"/>
+	<unicode hex="003F"/>
+	<outline>
+		<component base="_part.1" yScale="-1" xOffset="300" yOffset="300"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-50" yOffset="350"/>
+		<component base="_part.3" xOffset="200" yOffset="100"/>
+	</outline>
+</glyph>

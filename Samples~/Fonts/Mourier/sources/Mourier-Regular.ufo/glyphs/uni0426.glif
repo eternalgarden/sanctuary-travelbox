@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0426" format="2">
+	<advance width="800"/>
+	<unicode hex="0426"/>
+	<outline>
+		<component base="_part.3" xScale="-1" xOffset="800" yOffset="-200"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="350"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="1150" yOffset="350"/>
+		<component base="_part.3" xScale="-1" xOffset="800" yOffset="200"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="750"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="1150" yOffset="750"/>
+		<component base="_part.3" yOffset="200"/>
+		<component base="_part.7"/>
+		<component base="_part.3" yOffset="-400"/>
+		<component base="_part.5" xOffset="200" yOffset="200"/>
+	</outline>
+</glyph>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="_part.smallu" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.7" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="50" yOffset="-50"/>
+		<component base="_part.5" yScale="-1" yOffset="500"/>
+		<component base="_part.5" yScale="-1" xOffset="600" yOffset="500"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="50" yOffset="150"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-150" yOffset="150"/>
+		<component base="_part.3" yScale="-1" xOffset="200" yOffset="700"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>

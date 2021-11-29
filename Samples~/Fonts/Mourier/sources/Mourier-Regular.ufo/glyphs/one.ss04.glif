@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="one.ss04" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.7" xOffset="600"/>
+		<component base="_part.5" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="750" yOffset="550"/>
+		<component base="_part.7"/>
+		<component base="_part.3" xScale="-1" xOffset="600"/>
+		<component base="_part.5" xScale="-1" xOffset="600"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-150" yOffset="-50"/>
+	</outline>
+</glyph>

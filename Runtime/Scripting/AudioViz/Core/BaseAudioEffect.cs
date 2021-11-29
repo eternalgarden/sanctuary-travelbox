@@ -45,8 +45,8 @@ namespace PowderBox.Audio
         protected virtual void OnEffectUpkeepTick() { }
 
         // That probably shouldnt be here
-        protected static float RangedAmplitude { get; private set; }
-        protected static float RangedBuffer { get; private set; }
+        protected float RangedAmplitude { get; private set; }
+        protected float RangedBuffer { get; private set; }
 
         void Start()
         {

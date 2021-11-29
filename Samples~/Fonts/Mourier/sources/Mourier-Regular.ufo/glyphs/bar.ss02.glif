@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="bar.ss02" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.7" xOffset="300"/>
+		<component base="_part.2" yOffset="-400"/>
+		<component base="_part.2" xOffset="500" yOffset="-400"/>
+		<component base="_part.2" yOffset="200"/>
+		<component base="_part.2" xOffset="500" yOffset="200"/>
+		<component base="_part.2"/>
+		<component base="_part.2" xOffset="500"/>
+		<component base="_part.2" yOffset="-200"/>
+		<component base="_part.2" xOffset="500" yOffset="-200"/>
+	</outline>
+</glyph>

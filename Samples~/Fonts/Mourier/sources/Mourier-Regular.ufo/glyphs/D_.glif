@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="D" format="2">
+	<advance width="800"/>
+	<unicode hex="0044"/>
+	<outline>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="50" yOffset="150"/>
+		<component base="_part.5" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="50" yOffset="150"/>
+		<component base="_part.5" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="50" yOffset="350"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="550" yOffset="350"/>
+		<component base="_part.3" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="550" yOffset="-50"/>
+		<component base="_part.5" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="250" yOffset="-50"/>
+		<component base="_part.5" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="250" yOffset="550"/>
+		<component base="_part.7" xScale="-1" yScale="-1" xOffset="800" yOffset="700"/>
+	</outline>
+</glyph>

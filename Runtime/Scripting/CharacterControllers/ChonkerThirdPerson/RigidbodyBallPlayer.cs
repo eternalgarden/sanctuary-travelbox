@@ -8,6 +8,8 @@ https://catlikecoding.com/unity/tutorials/movement/
 
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class RigidbodyBallPlayer : MonoBehaviour
@@ -86,7 +88,7 @@ public class RigidbodyBallPlayer : MonoBehaviour
     Rigidbody _body;
     MeshRenderer _meshRenderer;
     Vector2 _playerInput;
-
+    
     Vector3 _velocity;
     Vector3 _desiredVelocity;
     Vector3 _contactNormal;
@@ -105,6 +107,10 @@ public class RigidbodyBallPlayer : MonoBehaviour
     float _minStairsDotProduct;
     float _minClimbDotProduct;
 
+    // TODO Temporary only possibly
+    List<ContactPoint> _currentContactPoints = new List<ContactPoint>(10);
+    Collision _currentCollision;
+
     bool IsGrounded => _groundContactCount > 0;
     bool IsOnSteep => _steepContactCount > 0;
     bool IsClimbing => _climbContactCount > 0;
@@ -119,7 +125,7 @@ public class RigidbodyBallPlayer : MonoBehaviour
 
         _body = GetComponent<Rigidbody>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
-        
+
         // Skipped curved world gravity
         _upAxis = Vector3.up;
 
@@ -219,6 +225,13 @@ public class RigidbodyBallPlayer : MonoBehaviour
         {
             // _meshRenderer.material.SetColor("_Color", Color.black);
             _signalCube.gameObject.SetActive(true);
+            _signalCube.GetComponentInChildren<TextMeshPro>().text = "Climbing";
+        }
+        else if (IsOnSteep)
+        {
+            // _meshRenderer.material.SetColor("_Color", Color.black);
+            _signalCube.gameObject.SetActive(true);
+            _signalCube.GetComponentInChildren<TextMeshPro>().text = "Steep";
         }
         else
         {
@@ -231,17 +244,19 @@ public class RigidbodyBallPlayer : MonoBehaviour
     {
         // -------------
 
-        if (CheckClimbing() || IsGrounded || SnapToGround() || CheckSteepContacts())
-        {
-            // All these checks to reset jump phase
-            _jumpPhase = 0;
-        }
-        else
-        {
-            // Reset contact normal
-            // ! this is really misleading
-            _contactNormal = _upAxis;
-        }
+        GetContactNormal();
+
+        // if (CheckClimbing() || IsGrounded || SnapToGround())
+        // {
+        //     // All these checks to reset jump phase
+        //     _jumpPhase = 0;
+        // }
+        // else
+        // {
+        //     // Reset contact normal
+        //     // ! this is really misleading
+        //     _contactNormal = _upAxis;
+        // }
 
         // -------------
     }
@@ -342,7 +357,7 @@ public class RigidbodyBallPlayer : MonoBehaviour
     Handling crevasses
     TODO Rename method, it is misleading 
     */
-    bool CheckSteepContacts()
+    bool GetContactNormal()
     {
         // -------------
 
@@ -358,18 +373,19 @@ public class RigidbodyBallPlayer : MonoBehaviour
                 return true;
             }
         }
+        else if (_steepContactCount == 1)
+        {
+            // todo consider case when multiple contacts
+            Debug.Log($"woof");
+            
+            _contactNormal = _steepContactNormal;
+        }
+        else
+        {
+            _contactNormal = _upAxis;
+        }
 
         return false;
-
-        // -------------
-    }
-
-    void ClearState()
-    {
-        // -------------
-
-        _groundContactCount = _steepContactCount = _climbContactCount = 0;
-        _contactNormal = _steepContactNormal = _climbNormal = Vector3.zero;
 
         // -------------
     }
@@ -399,6 +415,11 @@ public class RigidbodyBallPlayer : MonoBehaviour
 		xAxis = ProjectDirectionOnPlane(xAxis, _contactNormal);
 		zAxis = ProjectDirectionOnPlane(zAxis, _contactNormal);
 
+        _velocity = xAxis * _playerInput.x * maxSpeed + zAxis * _playerInput.y;
+
+        return;
+
+        // project the current velocity on both vectors to get the relative X and Z speeds.
         float currentX = Vector3.Dot(_velocity, xAxis);
         float currentZ = Vector3.Dot(_velocity, zAxis);
 
@@ -407,7 +428,8 @@ public class RigidbodyBallPlayer : MonoBehaviour
         float newX = Mathf.MoveTowards(currentX, _playerInput.x * maxSpeed, maxSpeedChange);
         float newZ = Mathf.MoveTowards(currentZ, _playerInput.y * maxSpeed, maxSpeedChange);
 
-        _velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+        // _velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+        _velocity += xAxis * newX + zAxis * newZ;
 
         // -------------
     }
@@ -463,6 +485,15 @@ public class RigidbodyBallPlayer : MonoBehaviour
         // -------------
     }
 
+    void ClearState()
+    {
+        // -------------
+
+        _groundContactCount = _steepContactCount = _climbContactCount = 0;
+        _contactNormal = _steepContactNormal = _climbNormal = Vector3.zero;
+
+        // -------------
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -481,11 +512,15 @@ public class RigidbodyBallPlayer : MonoBehaviour
 
     void EvaluateCollision(Collision collision)
     {
+        _currentCollision = collision;
+
         int layer = collision.gameObject.layer;
         float minDot = GetMinGroundedDotByLayer(layer);
 
         for (int i = 0; i < collision.contactCount; i++)
         {
+            _currentContactPoints.Add(collision.GetContact(i));
+
             Vector3 normal = collision.GetContact(i).normal;
 
             if (normal.y >= minDot)
@@ -504,6 +539,7 @@ public class RigidbodyBallPlayer : MonoBehaviour
                     _steepContactNormal += normal;
                 }
 
+                // TODO Rework so climbing isnt so "gluey" as soon as you get close to a climb surface
                 if (normal.y >= _minClimbDotProduct && IsLayerInMask(layer, _climbMask))
                 {
                     _climbContactCount += 1;
@@ -518,6 +554,29 @@ public class RigidbodyBallPlayer : MonoBehaviour
         {
             _contactNormal.Normalize();
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+
+        for (int i = 0; i < _currentContactPoints.Count; i++)
+        {
+            ContactPoint pt = _currentContactPoints[i];
+
+            Vector3 normal = pt.normal;
+            Vector3 position = pt.point;
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(position, position + (normal * 0.2f));
+        }
+
+        var sphere = GetComponent<SphereCollider>();
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position + sphere.center, transform.position + sphere.center + (_body.velocity * 0.2f));
+
+        _currentContactPoints.Clear();
     }
 
     static Vector3 ProjectDirectionOnPlane(Vector3 direction, Vector3 planeNormal)

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="guilsinglright" format="2">
+	<advance width="800"/>
+	<unicode hex="203A"/>
+	<outline>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-50" yOffset="350"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-50" yOffset="50"/>
+		<component base="_part.2" yScale="-1" xOffset="300" yOffset="700"/>
+		<component base="_part.2" yScale="-1" xOffset="300" yOffset="900"/>
+	</outline>
+</glyph>

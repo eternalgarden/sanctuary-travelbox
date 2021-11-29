@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="asterisk" format="2">
+	<advance width="800"/>
+	<unicode hex="002A"/>
+	<outline>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-350" yOffset="450"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="1" xOffset="-350" yOffset="-50"/>
+		<component base="_part.2" yScale="-1" yOffset="1000"/>
+		<component base="_part.2" yScale="-1" yOffset="600"/>
+		<component base="_part.2" yScale="-1" yOffset="800"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="1150" yOffset="450"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="1150" yOffset="-50"/>
+		<component base="_part.2" xScale="-1" yScale="-1" xOffset="800" yOffset="1000"/>
+		<component base="_part.2" xScale="-1" yScale="-1" xOffset="800" yOffset="600"/>
+		<component base="_part.2" xScale="-1" yScale="-1" xOffset="800" yOffset="800"/>
+		<component base="_part.2" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="850" yOffset="750"/>
+		<component base="_part.2" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="850" yOffset="-50"/>
+		<component base="_part.1" xScale="-1" xOffset="500" yOffset="300"/>
+	</outline>
+</glyph>

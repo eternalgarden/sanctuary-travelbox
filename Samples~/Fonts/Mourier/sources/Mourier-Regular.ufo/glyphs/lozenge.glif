@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="lozenge" format="2">
+	<advance width="800"/>
+	<unicode hex="25CA"/>
+	<outline>
+		<component base="_part.1" xOffset="200" yOffset="400"/>
+		<component base="_part.1" xScale="-1" xOffset="600" yOffset="400"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="600" yOffset="300"/>
+		<component base="_part.1" yScale="-1" xOffset="200" yOffset="300"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="500" yOffset="100"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="200" yOffset="400"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="500" yOffset="700"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="800" yOffset="400"/>
+	</outline>
+</glyph>

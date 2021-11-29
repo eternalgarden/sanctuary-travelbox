@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni030C" format="2">
+	<advance width="0"/>
+	<unicode hex="030C"/>
+	<outline>
+		<component base="_part.1" xOffset="-800" yOffset="600"/>
+		<component base="_part.3" xOffset="-600" yOffset="200"/>
+		<component base="_part.1" xOffset="-200" yOffset="600"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="_part.smallAalt" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.3" yScale="-1" xOffset="200" yOffset="900"/>
+		<component base="_part.3" xScale="-1" yScale="-1" xOffset="600" yOffset="500"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="1150" yOffset="350"/>
+		<component base="_part.3" yScale="-1" xOffset="400" yOffset="700"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-350" yOffset="350"/>
+		<component base="_part.3" xScale="-1" yScale="-1" xOffset="400" yOffset="700"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="550"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="750" yOffset="550"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="800" yOffset="500"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="200" yOffset="500"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>

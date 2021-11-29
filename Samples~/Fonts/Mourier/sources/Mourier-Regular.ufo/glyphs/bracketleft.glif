@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="bracketleft" format="2">
+	<advance width="800"/>
+	<unicode hex="005B"/>
+	<outline>
+		<component base="_part.5" yScale="-1" xOffset="200" yOffset="600"/>
+		<component base="_part.2" xOffset="200" yOffset="100"/>
+		<component base="_part.2" xOffset="200" yOffset="-300"/>
+	</outline>
+</glyph>

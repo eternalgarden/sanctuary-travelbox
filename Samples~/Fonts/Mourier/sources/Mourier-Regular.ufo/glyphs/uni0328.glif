@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0328" format="2">
+	<advance width="0"/>
+	<unicode hex="0328"/>
+	<outline>
+		<component base="_part.1" xScale="-1"/>
+		<component base="_part.5" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-750" yOffset="150"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>

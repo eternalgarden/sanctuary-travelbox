@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="A.ss03" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="v" yScale="-1" yOffset="700"/>
+		<component base="_part.3" xScale="-1" xOffset="600" yOffset="-200"/>
+	</outline>
+</glyph>

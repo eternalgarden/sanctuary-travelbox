@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0304" format="2">
+	<advance width="0"/>
+	<unicode hex="0304"/>
+	<outline>
+		<component base="_part.7" xScale="0" xyScale="1" yScale="0" yxScale="-1" xOffset="-50" yOffset="550"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>

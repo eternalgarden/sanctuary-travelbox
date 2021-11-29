@@ -68,9 +68,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -115,15 +115,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Averia-Bold SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -2125864399
   material: {fileID: -4627342227030130388}
-  materialHashCode: 0
+  materialHashCode: 184102769
   m_Version: 1.1.0
   m_SourceFontFileGUID: 50ebadd4b21f0cf448a9f17613a4c923
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 50ebadd4b21f0cf448a9f17613a4c923, type: 3}
   m_SourceFontFile: {fileID: 0}
   m_AtlasPopulationMode: 0
   m_FaceInfo:
+    m_FaceIndex: 0
     m_FamilyName: Averia
     m_StyleName: Bold
     m_PointSize: 74
@@ -1895,6 +1896,7 @@ MonoBehaviour:
   - {fileID: 4508606424545326155}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
+  m_ClearDynamicDataOnBuild: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0

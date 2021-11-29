@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="lozenge.ss02" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.1" xOffset="200" yOffset="400"/>
+		<component base="_part.1" xScale="-1" xOffset="600" yOffset="400"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="600" yOffset="300"/>
+		<component base="_part.1" yScale="-1" xOffset="200" yOffset="300"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="500" yOffset="100"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="200" yOffset="400"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="500" yOffset="700"/>
+		<component base="_part.1" xScale="-1" yScale="-1" xOffset="800" yOffset="400"/>
+		<component base="_part.2" yOffset="-400"/>
+		<component base="_part.2" xOffset="500" yOffset="-400"/>
+		<component base="_part.2" yOffset="200"/>
+		<component base="_part.2" xOffset="500" yOffset="200"/>
+		<component base="_part.2" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-350" yOffset="750"/>
+		<component base="_part.2" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="-350" yOffset="250"/>
+		<component base="_part.2" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="250" yOffset="750"/>
+		<component base="_part.2" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="250" yOffset="250"/>
+	</outline>
+</glyph>

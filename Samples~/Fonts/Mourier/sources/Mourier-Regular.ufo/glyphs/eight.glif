@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="eight" format="2">
+	<advance width="800"/>
+	<unicode hex="0038"/>
+	<outline>
+		<component base="_part.7" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="50" yOffset="750"/>
+		<component base="_part.7" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="50" yOffset="550"/>
+		<component base="_part.7" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="50" yOffset="350"/>
+		<component base="_part.1" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="650" yOffset="150"/>
+		<component base="_part.1" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="50" yOffset="150"/>
+		<component base="_part.1" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="250" yOffset="150"/>
+		<component base="_part.1" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="450" yOffset="150"/>
+	</outline>
+</glyph>

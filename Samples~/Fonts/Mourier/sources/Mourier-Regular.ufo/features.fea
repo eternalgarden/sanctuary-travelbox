@@ -1,0 +1,148 @@
+languagesystem DFLT dflt;
+
+languagesystem latn dflt;
+languagesystem latn AZE;
+languagesystem latn CRT;
+languagesystem latn KAZ;
+languagesystem latn TAT;
+languagesystem latn TRK;
+languagesystem latn ROM;
+languagesystem latn MOL;
+languagesystem latn CAT;
+
+feature aalt {
+feature locl;
+feature salt;
+feature ss01;
+feature ss02;
+feature ss03;
+feature ss04;
+feature ss05;
+
+} aalt ;
+
+feature locl {
+lookup locl_latn_0 {
+	script latn;
+	language AZE;
+	language CRT;
+	language KAZ;
+	language TAT;
+	language TRK;
+	sub i by i.loclTRK;
+} locl_latn_0;
+
+lookup locl_latn_1 {
+	script latn;
+	language ROM;
+	language MOL;
+	sub Scedilla by uni0218;
+	sub scedilla by uni0219;
+	sub uni0162 by uni021A;
+	sub uni0163 by uni021B;
+} locl_latn_1;
+
+lookup locl_latn_2 {
+	script latn;
+	language CAT;
+	sub  l' periodcentered' l by ldot;
+	sub  L' periodcentered' L by Ldot;
+} locl_latn_2;
+
+} locl ;
+
+feature salt {
+sub AE by AE.ss01;
+sub Oslash by Oslash.ss01;
+sub OE by OE.ss01;
+
+} salt ;
+
+feature ss01 {
+featureNames {
+	name "legacy AE and OE";
+};
+sub AE by AE.ss01;
+sub Oslash by Oslash.ss01;
+sub OE by OE.ss01;
+
+} ss01 ;
+
+feature ss02 {
+featureNames {
+	name "full-space symbols";
+};
+sub exclam by exclam.ss02;
+sub exclamdown by exclamdown.ss02;
+sub question by question.ss02;
+sub questiondown by questiondown.ss02;
+sub parenleft by parenleft.ss02;
+sub parenright by parenright.ss02;
+sub braceleft by braceleft.ss02;
+sub braceright by braceright.ss02;
+sub bracketleft by bracketleft.ss02;
+sub bracketright by bracketright.ss02;
+sub space by space.ss02;
+sub plus by plus.ss02;
+sub equal by equal.ss02;
+sub lozenge by lozenge.ss02;
+sub bar by bar.ss02;
+sub brokenbar by brokenbar.ss02;
+
+} ss02 ;
+
+feature ss03 {
+featureNames {
+	name "alternative A, a";
+};
+sub A by A.ss03;
+sub Aacute by Aacute.ss03;
+sub Abreve by Abreve.ss03;
+sub Acircumflex by Acircumflex.ss03;
+sub Adieresis by Adieresis.ss03;
+sub Agrave by Agrave.ss03;
+sub Amacron by Amacron.ss03;
+sub Aogonek by Aogonek.ss03;
+sub Atilde by Atilde.ss03;
+sub a by a.ss03;
+sub aacute by aacute.ss03;
+sub abreve by abreve.ss03;
+sub acircumflex by acircumflex.ss03;
+sub adieresis by adieresis.ss03;
+sub agrave by agrave.ss03;
+sub amacron by amacron.ss03;
+sub aogonek by aogonek.ss03;
+sub aring by aring.ss03;
+sub atilde by atilde.ss03;
+sub ae by ae.ss03;
+
+} ss03 ;
+
+feature ss04 {
+featureNames {
+	name "alternative figures";
+};
+sub zero by zero.ss04;
+sub one by one.ss04;
+sub two by two.ss04;
+sub three by three.ss04;
+sub four by four.ss04;
+sub five by five.ss04;
+sub six by six.ss04;
+sub seven by seven.ss04;
+sub eight by eight.ss04;
+sub nine by nine.ss04;
+
+} ss04 ;
+
+feature ss05 {
+featureNames {
+	name "modern cyrillic forms";
+};
+sub uni0414 by uni0414.ss05;
+sub uni0433 by uni0433.ss05;
+sub uni0434 by uni0434.ss05;
+
+} ss05 ;
+
+

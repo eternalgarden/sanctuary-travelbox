@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="two" format="2">
+	<advance width="800"/>
+	<unicode hex="0032"/>
+	<outline>
+		<component base="_part.7"/>
+		<component base="_part.7" xOffset="200"/>
+		<component base="_part.3" yScale="-1" xOffset="400" yOffset="500"/>
+		<component base="_part.3" yScale="-1" xOffset="400" yOffset="700"/>
+		<component base="_part.3" yScale="-1" xOffset="400" yOffset="900"/>
+		<component base="_part.3" yScale="-1" xOffset="400" yOffset="1100"/>
+	</outline>
+</glyph>

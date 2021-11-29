@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="A" format="2">
+	<advance width="800"/>
+	<unicode hex="0041"/>
+	<outline>
+		<component base="_part.7"/>
+		<component base="_part.7" xOffset="600"/>
+		<component base="_part.7" xScale="0" xyScale="-1" yScale="0" yxScale="1" xOffset="50" yOffset="750"/>
+		<component base="_part.3" xOffset="200"/>
+		<component base="_part.5" xOffset="200"/>
+		<component base="_part.5" xOffset="400"/>
+	</outline>
+</glyph>

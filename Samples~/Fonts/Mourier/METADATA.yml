@@ -1,0 +1,20 @@
+---
+unified font repository version: "0.2"
+unified font repository url: https://github.com/raphaelbastide/Unified-Font-Repository/
+typeface family:
+  name: Mourier
+  tags:
+  - Geometric
+  - Abstract
+  - Fantasy
+<<<<<<< HEAD
+  repository url: https://gitlab.com/velvetyne/mourier
+=======
+  repository url: https://gitlab.com/arielmartinperez/mourier
+>>>>>>> 13d462eeb3c5301cfa6f9aa9f0ba5ac6a080fa58
+  project url:
+  tools:
+  - Fontforge, Glyphs
+  similar fonts:
+  sample text: Sphinx of black quartz, judge my vow!
+...

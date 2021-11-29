@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="_part.Usmall" format="2">
+	<advance width="800"/>
+	<outline>
+		<component base="_part.5" xScale="-1" xOffset="200"/>
+		<component base="_part.7" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="750" yOffset="150"/>
+		<component base="_part.5" xScale="-1" xOffset="800"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="950" yOffset="550"/>
+		<component base="_part.3" xScale="0" xyScale="-1" yScale="0" yxScale="-1" xOffset="750" yOffset="550"/>
+		<component base="_part.3" xScale="-1" xOffset="400"/>
+		<component base="_part.3" xScale="-1" xOffset="800"/>
+	</outline>
+	<lib>
+		<dict>
+			<key>com.schriftgestaltung.Glyphs.Export</key>
+			<false/>
+		</dict>
+	</lib>
+</glyph>
