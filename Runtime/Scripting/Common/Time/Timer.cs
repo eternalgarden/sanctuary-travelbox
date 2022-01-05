@@ -5,81 +5,125 @@ ZZZzz /,`.-'`'    -.  ;-;;,_
     '---''(_/--'  `-'\_)
 */
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
-// using TMPro;
 
-namespace Sanctuary.Core
+namespace TravelBox.Common
 {
-
-    public class Timer : MonoBehaviour
+    public class SanctuaryTimer : IDisposable
     {
-        // -------------
+        /* ⭐ ---- ---- */
 
-        DateTime endTime;
-        DateTime pauseTime;
+        // Task timer;
+        TimeSpan totalSpan;
+        TimeSpan currentSpan;
+        CancellationTokenSource timerTokenSource;
+
         bool isTimerEnabled = false;
         bool isTimerPaused = false;
 
-        public Action OnTimerStarted;
-        public Action OnTimerDone;
-        public Action<TimeSpan> OnTimeLeftChanged;
+        public Action<TimeSpan> OnTimerTick;
 
-        void Update()
+        // Just in case
+        ~SanctuaryTimer()
         {
-            // -------------
-
-            if (isTimerEnabled)
-            {
-                TimeSpan remainingTime = endTime - DateTime.UtcNow;
-
-                if (remainingTime < TimeSpan.Zero)
-                {
-                    OnTimerDone.Invoke();
-                    isTimerEnabled = false;
-                }
-                else
-                {
-                    OnTimeLeftChanged.Invoke(remainingTime);
-                }
-            }
-
-            // -------------
+            /* ⭐ ---- ---- */
+            
+            Dispose();
+            
+            /* ---- ---- 🌠 */
         }
 
-
-        public void StatTimer(int minutes)
+        public void StartTimer()
         {
-            // -------------
+            /* ⭐ ---- ---- */
 
-            var start = DateTime.UtcNow; // Use UtcNow instead of Now
-            endTime = start.AddMinutes(minutes);
-            isTimerEnabled = true;
+            isTimerEnabled = false;
+            isTimerPaused = false;
+            totalSpan = TimeSpan.Zero;
+            RunTimer();
 
-            // -------------
+            /* ---- ---- 🌠 */
         }
 
         public void ToggleTimerPause()
         {
-            // -------------
-            
+            /* ⭐ ---- ---- */
+
+            isTimerPaused = !isTimerPaused;
+
             if (isTimerPaused)
             {
-                TimeSpan timeDifference = DateTime.UtcNow - pauseTime;
-                endTime += timeDifference;
-                isTimerEnabled = true;
+                totalSpan += currentSpan;
+                StopTimer();
             }
             else
             {
-                isTimerEnabled = false;
-                pauseTime = DateTime.UtcNow;
+                RunTimer();
             }
 
-            isTimerPaused = !isTimerPaused;
-            
-            // -------------
+            /* ---- ---- 🌠 */
         }
 
-        // -------------
+        public void StopTimer()
+        {
+            /* ⭐ ---- ---- */
+
+            timerTokenSource.Cancel();
+
+            /* ---- ---- 🌠 */
+        }
+
+        // * lol don't forget to dispose it
+        public void Dispose()
+        {
+            /* ⭐ ---- ---- */
+            
+            StopTimer();
+            
+            /* ---- ---- 🌠 */
+        }
+
+        void RunTimer()
+        {
+            /* ⭐ ---- ---- */
+
+            timerTokenSource = new CancellationTokenSource();
+
+            Task timerLoop = Task.Factory.StartNew(
+                action: async () => TimerLoop(timerTokenSource.Token),
+                cancellationToken: timerTokenSource.Token,
+                creationOptions: TaskCreationOptions.LongRunning,
+                scheduler: TaskScheduler.Default);
+
+            /* ---- ---- 🌠 */
+        }
+
+        async void TimerLoop(CancellationToken token)
+        {
+            /* ⭐ ---- ---- */
+
+            DateTime startTime = DateTime.UtcNow; // Use UtcNow instead of Now
+
+            while (true)
+            {
+                currentSpan = DateTime.UtcNow - startTime;
+                OnTimerTick?.Invoke(totalSpan + currentSpan);
+                // * This thing is actually most important'
+                // ? Adding token here below is the way to out of this loop
+                // https://stackoverflow.com/questions/13695499/proper-way-to-implement-a-never-ending-task-timers-vs-task
+                // else could be:
+                // token.ThrowIfCancellationRequested();
+                // This way the cancellation will happen instantaneously if inside
+                // the Task.Delay, rather than having to wait for the Thread.Sleep to finish.
+                await Task.Delay(100, token);
+            }
+
+            /* ---- ---- 🌠 */
+        }
+
+        /* ---- ---- 🌠 */
     }
 }
 /* maria aurelia at 09 November 2021 🌊 */
