@@ -25,16 +25,6 @@ namespace TravelBox.Common
 
         public Action<TimeSpan> OnTimerTick;
 
-        // Just in case
-        ~SanctuaryTimer()
-        {
-            /* ⭐ ---- ---- */
-            
-            Dispose();
-            
-            /* ---- ---- 🌠 */
-        }
-
         public void StartTimer()
         {
             /* ⭐ ---- ---- */
