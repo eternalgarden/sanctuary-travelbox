@@ -1,86 +1,178 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TravelBox.Common
 {
-    public class Countdown : MonoBehaviour
+    public interface ICountdownCapable
+    {
+        event Action OnCountdownComplete;
+        event Action<TimeSpan> OnCountdownTick;
+
+        void StartCountdown(TimeSpan length);
+        void ToggleCountdownPause();
+        void StopCountdown();
+    }
+
+    public class Countdown : ICountdownCapable, IDisposable
     {
         // -------------
 
+        const int TICK_LENGTH = 9;
+        CancellationTokenSource o_cancellationTokenSource;
         DateTime endTime;
         DateTime pauseTime;
-        bool isTimerEnabled = false;
-        bool isTimerPaused = false;
+        bool isRunning = false;
+        bool isPaused = false;
 
-        public Action OnCountdownDone;
-        public Action<TimeSpan> OnCountdownTick;
+        //
+        // ⛺ ─── ICountdownCapable Interface ───────────────────────────────────────────────────
+        //
 
-        void Update()
+        #region ICountdownCapable Interface
+
+        public event Action OnCountdownComplete;
+
+        public event Action<TimeSpan> OnCountdownTick;
+
+        public void StartCountdown(TimeSpan length)
         {
-            // -------------
+            /* ⭐ ---- ---- */
 
-            if (isTimerEnabled)
+            if (isRunning)
             {
-                TimeSpan remainingTime = endTime - DateTime.UtcNow;
-
-                if (remainingTime < TimeSpan.Zero)
-                {
-                    OnCountdownDone.Invoke();
-                    isTimerEnabled = false;
-                }
-                else
-                {
-                    OnCountdownTick.Invoke(remainingTime);
-                }
+                throw new Exception("Countdown is already running.");
             }
 
-            // -------------
-        }
-
-
-        public void StatTimer(int minutes)
-        {
-            // -------------
-
             var start = DateTime.UtcNow; // Use UtcNow instead of Now
-            endTime = start.AddMinutes(minutes);
-            isTimerEnabled = true;
+            endTime = start.AddTicks(length.Ticks);
 
-            // -------------
+            RunCountdownClock();
+
+            isRunning = true;
+
+            /* ---- ---- 🌠 */
         }
 
-        public void ToggleTimerPause()
+        public void ToggleCountdownPause()
         {
-            // -------------
-            
-            if (isTimerPaused)
+            /* ⭐ ---- ---- */
+
+            if (isPaused)
             {
                 TimeSpan timeDifference = DateTime.UtcNow - pauseTime;
                 endTime += timeDifference;
-                isTimerEnabled = true;
+                RunCountdownClock();
             }
             else
             {
-                isTimerEnabled = false;
+                StopCountdownClock();
                 pauseTime = DateTime.UtcNow;
             }
 
-            isTimerPaused = !isTimerPaused;
-            
-            // -------------
-        }
+            isPaused = !isPaused;
 
-        public void StopTimer()
-        {
-            /* ⭐ ---- ---- */
-            
-            isTimerEnabled = false;
-            OnCountdownTick?.Invoke(TimeSpan.Zero);
-            
             /* ---- ---- 🌠 */
         }
+
+        public void StopCountdown()
+        {
+            /* ⭐ ---- ---- */
+
+            isPaused = false;
+            isRunning = false;
+            OnCountdownTick?.Invoke(TimeSpan.Zero);
+
+            /* ---- ---- 🌠 */
+        }
+
+        public void Dispose()
+        {
+            /* ⭐ ---- ---- */
+
+            o_cancellationTokenSource.Cancel();
+            o_cancellationTokenSource = null;
+
+            /* ---- ---- 🌠 */
+        }
+
+        #endregion // ICountdownCapable Interface
+        
+        //
+        // ⛺ ─── Private Implementation ───────────────────────────────────────────────────
+        //
+        
+        #region Private Implementation
+        
+        void RunCountdownClock()
+        {
+            /* ⭐ ---- ---- */
+
+            o_cancellationTokenSource = new CancellationTokenSource();
+
+            Task timerLoop = Task.Factory.StartNew(
+                action: async () => CountdownLoop(o_cancellationTokenSource.Token),
+                cancellationToken: o_cancellationTokenSource.Token,
+                creationOptions: TaskCreationOptions.LongRunning,
+                scheduler: TaskScheduler.FromCurrentSynchronizationContext());
+
+            /* ---- ---- 🌠 */
+        }
+
+        void StopCountdownClock()
+        {
+            /* ⭐ ---- ---- */
+
+            o_cancellationTokenSource.Cancel();
+
+            /* ---- ---- 🌠 */
+        }
+
+        async void CountdownLoop(CancellationToken cancelToken)
+        {
+            /* ⭐ ---- ---- */
+
+            try
+            {
+                while (true)
+                {
+                    TimeSpan remainingTime = endTime - DateTime.UtcNow;
+
+                    if (remainingTime < TimeSpan.Zero)
+                    {
+                        OnCountdownComplete.Invoke();
+                    }
+                    else
+                    {
+                        OnCountdownTick.Invoke(remainingTime);
+                    }
+
+                    // * This thing is actually most important'
+                    // ? Adding token here below is the way to out of this loop
+                    // https://stackoverflow.com/questions/13695499/proper-way-to-implement-a-never-ending-task-timers-vs-task
+                    // else could be:
+                    // token.ThrowIfCancellationRequested();
+                    // This way the cancellation will happen instantaneously if inside
+                    // the Task.Delay, rather than having to wait for the Thread.Sleep to finish.
+                    await Task.Delay(TICK_LENGTH, cancelToken);
+                }
+            }
+            catch (TaskCanceledException) 
+            { 
+                // TODO Hmm, is it oki? I kindof expect it to happen and whatevs
+            }
+            finally
+            {
+                o_cancellationTokenSource.Dispose();
+            }
+
+            /* ---- ---- 🌠 */
+        }
+        
+        #endregion // Private Implementation
 
         // -------------
     }

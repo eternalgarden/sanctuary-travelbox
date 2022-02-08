@@ -1,20 +1,21 @@
 {
-    "name": "com.sanctuary.travel-box",
-    "version": "1.1.0",
-    "displayName": "sanctuary-travel-box",
-    "description": "fun fun 🎠various addons and snippet ",
-    "samples": [
-      {
-        "displayName": "Fonts",
-        "description": "A collection of fonts with their TMPro SDF versions",
-        "path": "Samples~/Fonts"
-      }
-    ],
-    "keywords": [
-      "wow"
-    ],
-    "author": {
-      "name": "marai marai",
-      "url": "https://www.spacejam.com/"
+  "name": "com.sanctuary.travel-box",
+  "version": "0.2.2",
+  "displayName": "sanctuary-travel-box",
+  "description": "fun fun \ud83c\udfa0various addons and snippet",
+  "samples": [
+    {
+      "displayName": "Fonts",
+      "description": "A collection of fonts with their TMPro SDF versions",
+      "path": "Samples~/Fonts"
     }
-  }
+  ],
+  "keywords": [
+    "wow"
+  ],
+  "author": {
+    "name": "marai marai",
+    "url": "https://www.spacejam.com/"
+  },
+  "type": "module"
+}
