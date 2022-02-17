@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace PowderBox.Audio
+namespace TravelBox.Audio
 {
     public abstract class BaseAudioEffect : MonoBehaviour
     {

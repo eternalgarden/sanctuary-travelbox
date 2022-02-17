@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PowderBox.PostProcessing;
+using TravelBox.PostProcessing;
 
-namespace PowderBox.Audio
+namespace TravelBox.Audio
 {
     public class SwitchMaterialColorEffect : BaseAudioEffect
     {

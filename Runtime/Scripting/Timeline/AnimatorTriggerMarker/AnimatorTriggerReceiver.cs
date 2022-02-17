@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace PowderBox.Timeline
+namespace TravelBox.Timeline
 {
     [RequireComponent(typeof(Animator))]
     public class AnimatorTriggerReceiver : MonoBehaviour, INotificationReceiver

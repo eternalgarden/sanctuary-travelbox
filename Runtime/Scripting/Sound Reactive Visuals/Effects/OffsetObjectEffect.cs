@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PowderBox.Audio
+namespace TravelBox.Audio
 {
     public class OffsetObjectEffect : BaseAudioEffect
     {

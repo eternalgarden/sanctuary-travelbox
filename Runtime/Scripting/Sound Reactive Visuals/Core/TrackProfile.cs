@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PowderBox.Audio
+namespace TravelBox.Audio
 {
     /* Created at 22 January 2020 by mria 🌊🐱 */
     [CreateAssetMenu(fileName = "TrackProfile.asset", menuName = "Visualisation/TrackProfile")]

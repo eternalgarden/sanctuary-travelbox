@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace PowderBox.Timeline
+namespace TravelBox.Timeline
 {
     [CustomStyle("TimeMarker")]
     public class TimelinePauseMarker : Marker, INotification

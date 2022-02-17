@@ -11,16 +11,7 @@ using UnityEngine;
 
 namespace TravelBox.Common
 {
-    public interface ITimingCapable
-    {
-        event Action<TimeSpan> TimerTicked;
-
-        void StartTimer();
-        void ToggleTimerPause();
-        void StopTimer();
-    }
-
-    public class SanctuaryTimer : ITimingCapable, IDisposable
+    public class SanctuaryTimer : ITimingCapable
     {
         /* ⭐ ---- ---- */
 
@@ -42,15 +33,6 @@ namespace TravelBox.Common
         #region Public Interface
         
         public event Action<TimeSpan> TimerTicked;
-
-        public SanctuaryTimer()
-        {
-            /* ⭐ ---- ---- */
-            
-            o_cancellationTokenSource = new CancellationTokenSource();
-            
-            /* ---- ---- 🌠 */
-        }
 
         public void StartTimer()
         {
@@ -111,7 +93,7 @@ namespace TravelBox.Common
         {
             /* ⭐ ---- ---- */
             
-            o_cancellationTokenSource.Cancel();
+            o_cancellationTokenSource?.Cancel();
             o_cancellationTokenSource = null;
             
             /* ---- ---- 🌠 */
@@ -129,6 +111,8 @@ namespace TravelBox.Common
         void RunTimerClock()
         {
             /* ⭐ ---- ---- */
+
+            o_cancellationTokenSource = new CancellationTokenSource();
             
             Task timerLoop = Task.Factory.StartNew(
                 action: async () => TimerLoop(o_cancellationTokenSource.Token),
@@ -176,7 +160,7 @@ namespace TravelBox.Common
             }
             finally
             {
-                o_cancellationTokenSource.Dispose();
+                o_cancellationTokenSource?.Dispose();
             }
 
             /* ---- ---- 🌠 */

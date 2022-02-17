@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static PowderBox.Extensions.CollectionExtensions;
+using static TravelBox.Extensions.CollectionExtensions;
 
-namespace PowderBox
+namespace TravelBox
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class RandomWalker : MonoBehaviour

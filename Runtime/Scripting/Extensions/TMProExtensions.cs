@@ -7,7 +7,7 @@ ZZZzz /,`.-'`'    -.  ;-;;,_
 using System;
 using TMPro;
 
-namespace Sanctuary.Extensions
+namespace TravelBox.Extensions
 {
     public static class TMProExtensions
     {

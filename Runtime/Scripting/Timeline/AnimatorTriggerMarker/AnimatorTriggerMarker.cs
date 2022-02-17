@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace PowderBox.Timeline
+namespace TravelBox.Timeline
 {
     [CustomStyle("Annotation")]
     public class AnimatorTriggerMarker : Marker, INotification

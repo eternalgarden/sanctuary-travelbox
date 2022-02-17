@@ -7,21 +7,11 @@ using UnityEngine;
 
 namespace TravelBox.Common
 {
-    public interface ICountdownCapable
-    {
-        event Action OnCountdownComplete;
-        event Action<TimeSpan> OnCountdownTick;
-
-        void StartCountdown(TimeSpan length);
-        void ToggleCountdownPause();
-        void StopCountdown();
-    }
-
-    public class Countdown : ICountdownCapable, IDisposable
+    public class SanctuaryCountdown : ICountdownCapable
     {
         // -------------
 
-        const int TICK_LENGTH = 9;
+        const int TICK_LENGTH = 10;
         CancellationTokenSource o_cancellationTokenSource;
         DateTime endTime;
         DateTime pauseTime;
@@ -47,10 +37,19 @@ namespace TravelBox.Common
                 throw new Exception("Countdown is already running.");
             }
 
+            Debug.Log($"here4a {length.Minutes}");
+
+
             var start = DateTime.UtcNow; // Use UtcNow instead of Now
             endTime = start.AddTicks(length.Ticks);
 
+            Debug.Log($"here4b");
+
+
             RunCountdownClock();
+
+            Debug.Log($"here5");
+
 
             isRunning = true;
 
@@ -93,23 +92,26 @@ namespace TravelBox.Common
         {
             /* ⭐ ---- ---- */
 
-            o_cancellationTokenSource.Cancel();
+            o_cancellationTokenSource?.Cancel();
             o_cancellationTokenSource = null;
 
             /* ---- ---- 🌠 */
         }
 
         #endregion // ICountdownCapable Interface
-        
+
         //
         // ⛺ ─── Private Implementation ───────────────────────────────────────────────────
         //
-        
+
         #region Private Implementation
-        
+
         void RunCountdownClock()
         {
             /* ⭐ ---- ---- */
+
+            Debug.Log($"here6");
+
 
             o_cancellationTokenSource = new CancellationTokenSource();
 
@@ -117,7 +119,9 @@ namespace TravelBox.Common
                 action: async () => CountdownLoop(o_cancellationTokenSource.Token),
                 cancellationToken: o_cancellationTokenSource.Token,
                 creationOptions: TaskCreationOptions.LongRunning,
-                scheduler: TaskScheduler.FromCurrentSynchronizationContext());
+                scheduler: TaskScheduler.Default);
+
+            Debug.Log($"here7");
 
             /* ---- ---- 🌠 */
         }
@@ -141,12 +145,22 @@ namespace TravelBox.Common
                 {
                     TimeSpan remainingTime = endTime - DateTime.UtcNow;
 
+                    Debug.Log($"COUN TDOWN LOOP TICK");
+
+                    Debug.Log(remainingTime);
+                    Debug.Log(remainingTime.Minutes);
+                    Debug.Log(endTime);
+
                     if (remainingTime < TimeSpan.Zero)
                     {
+                        Debug.Log($"complete");
+
                         OnCountdownComplete.Invoke();
                     }
                     else
                     {
+                        Debug.Log($"ooops");
+
                         OnCountdownTick.Invoke(remainingTime);
                     }
 
@@ -160,18 +174,27 @@ namespace TravelBox.Common
                     await Task.Delay(TICK_LENGTH, cancelToken);
                 }
             }
-            catch (TaskCanceledException) 
-            { 
-                // TODO Hmm, is it oki? I kindof expect it to happen and whatevs
-            }
-            finally
+            catch(Exception ex)
             {
-                o_cancellationTokenSource.Dispose();
+                throw ex;
             }
+            // catch (TaskCanceledException)
+            // {
+            //     // TODO Hmm, is it oki? I kindof expect it to happen and whatevs
+            //     Debug.Log($"countdown loop cancelled");
+            // }
+
+            Debug.Log($"out of loop");
+            o_cancellationTokenSource?.Dispose();
+            // finally
+            // {
+            //     Debug.Log($"FINALLY");
+            //     o_cancellationTokenSource?.Dispose();
+            // }
 
             /* ---- ---- 🌠 */
         }
-        
+
         #endregion // Private Implementation
 
         // -------------

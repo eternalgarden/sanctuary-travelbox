@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace PowderBox.Timeline
+namespace TravelBox.Timeline
 {
     [RequireComponent(typeof(PlayableDirector))]
     public class TimelinePauseReceiver : MonoBehaviour, INotificationReceiver

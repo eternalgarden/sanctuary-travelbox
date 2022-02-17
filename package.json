@@ -17,5 +17,6 @@
     "name": "marai marai",
     "url": "https://www.spacejam.com/"
   },
-  "type": "module"
+  "type": "library",
+  "hideInEditor": false
 }
