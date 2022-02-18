@@ -7,7 +7,7 @@ namespace TravelBox.Common
         event Action OnCountdownComplete;
         event Action<TimeSpan> OnCountdownTick;
 
-        void StartCountdown(TimeSpan length);
+        void RunCountdown(TimeSpan length);
         void ToggleCountdownPause();
         void StopCountdown();
     }

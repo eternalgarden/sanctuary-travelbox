@@ -15,7 +15,7 @@ public class SimpleOrbitalCamera : MonoBehaviour
     public float rotateSpeed = 20f;
     [ReadOnly] public float rotationTime;
 
-    float xSpeed = 100;
+    // float xSpeed = 100;
     float ySpeed = 100;
 
     float x;

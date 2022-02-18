@@ -7,16 +7,48 @@ using UnityEngine;
 
 namespace TravelBox.Common
 {
-    public class SanctuaryCountdown : ICountdownCapable
+    public class SanctuaryCountdown : MonoBehaviour, ICountdownCapable
     {
         // -------------
 
         const int TICK_LENGTH = 10;
         CancellationTokenSource o_cancellationTokenSource;
-        DateTime endTime;
+        DateTime _endTime;
         DateTime pauseTime;
         bool isRunning = false;
         bool isPaused = false;
+
+        void Update()
+        {
+            // -------------
+            // 
+            
+
+            if (isRunning)
+            {
+            Debug.Log($"asdfasdf");
+
+                if (isPaused is false)
+                {
+            Debug.Log($"111111111111");
+
+                    TimeSpan remainingTime = _endTime - DateTime.UtcNow;
+
+                    if (remainingTime < TimeSpan.Zero)
+                    {
+                        OnCountdownComplete?.Invoke();
+                    }
+                    else
+                    {
+                        Debug.Log($"ooops");
+
+                        OnCountdownTick?.Invoke(remainingTime);
+                    }
+                }
+            }
+
+            // -------------
+        }
 
         //
         // ⛺ ─── ICountdownCapable Interface ───────────────────────────────────────────────────
@@ -28,27 +60,24 @@ namespace TravelBox.Common
 
         public event Action<TimeSpan> OnCountdownTick;
 
-        public void StartCountdown(TimeSpan length)
+        public void RunCountdown(TimeSpan length)
         {
             /* ⭐ ---- ---- */
+
+            Debug.Log($"help");
+            
 
             if (isRunning)
             {
                 throw new Exception("Countdown is already running.");
             }
 
-            Debug.Log($"here4a {length.Minutes}");
-
-
             var start = DateTime.UtcNow; // Use UtcNow instead of Now
-            endTime = start.AddTicks(length.Ticks);
+            _endTime = start.AddTicks(length.Ticks);
 
-            Debug.Log($"here4b");
+            this.enabled = true;
 
-
-            RunCountdownClock();
-
-            Debug.Log($"here5");
+            Debug.Log($"yuppp");
 
 
             isRunning = true;
@@ -63,12 +92,10 @@ namespace TravelBox.Common
             if (isPaused)
             {
                 TimeSpan timeDifference = DateTime.UtcNow - pauseTime;
-                endTime += timeDifference;
-                RunCountdownClock();
+                _endTime += timeDifference;
             }
             else
             {
-                StopCountdownClock();
                 pauseTime = DateTime.UtcNow;
             }
 
@@ -83,6 +110,9 @@ namespace TravelBox.Common
 
             isPaused = false;
             isRunning = false;
+
+            this.enabled = false;
+
             OnCountdownTick?.Invoke(TimeSpan.Zero);
 
             /* ---- ---- 🌠 */
@@ -106,78 +136,55 @@ namespace TravelBox.Common
 
         #region Private Implementation
 
-        void RunCountdownClock()
+        [Obsolete]
+        async Task CountdownLoop(CancellationToken cancelToken)
         {
             /* ⭐ ---- ---- */
 
-            Debug.Log($"here6");
+            // * That stays here as a grim tomb of using tpl library without
+            // * understainding how it works and how it works in unity
 
-
-            o_cancellationTokenSource = new CancellationTokenSource();
-
-            Task timerLoop = Task.Factory.StartNew(
-                action: async () => CountdownLoop(o_cancellationTokenSource.Token),
-                cancellationToken: o_cancellationTokenSource.Token,
-                creationOptions: TaskCreationOptions.LongRunning,
-                scheduler: TaskScheduler.Default);
-
-            Debug.Log($"here7");
-
-            /* ---- ---- 🌠 */
-        }
-
-        void StopCountdownClock()
-        {
-            /* ⭐ ---- ---- */
-
-            o_cancellationTokenSource.Cancel();
-
-            /* ---- ---- 🌠 */
-        }
-
-        async void CountdownLoop(CancellationToken cancelToken)
-        {
-            /* ⭐ ---- ---- */
-
-            try
+            // try
+            // {
+            while (true)
             {
-                while (true)
+                TimeSpan remainingTime = _endTime - DateTime.UtcNow;
+
+                Debug.Log($"COUN TDOWN LOOP TICK");
+
+                Debug.Log(remainingTime);
+                Debug.Log(remainingTime.Minutes);
+                Debug.Log(_endTime);
+
+                if (remainingTime < TimeSpan.Zero)
                 {
-                    TimeSpan remainingTime = endTime - DateTime.UtcNow;
+                    Debug.Log($"complete");
 
-                    Debug.Log($"COUN TDOWN LOOP TICK");
-
-                    Debug.Log(remainingTime);
-                    Debug.Log(remainingTime.Minutes);
-                    Debug.Log(endTime);
-
-                    if (remainingTime < TimeSpan.Zero)
-                    {
-                        Debug.Log($"complete");
-
-                        OnCountdownComplete.Invoke();
-                    }
-                    else
-                    {
-                        Debug.Log($"ooops");
-
-                        OnCountdownTick.Invoke(remainingTime);
-                    }
-
-                    // * This thing is actually most important'
-                    // ? Adding token here below is the way to out of this loop
-                    // https://stackoverflow.com/questions/13695499/proper-way-to-implement-a-never-ending-task-timers-vs-task
-                    // else could be:
-                    // token.ThrowIfCancellationRequested();
-                    // This way the cancellation will happen instantaneously if inside
-                    // the Task.Delay, rather than having to wait for the Thread.Sleep to finish.
-                    await Task.Delay(TICK_LENGTH, cancelToken);
+                    OnCountdownComplete.Invoke();
                 }
+                else
+                {
+                    Debug.Log($"ooops");
+
+                    OnCountdownTick?.Invoke(remainingTime);
+                }
+
+                Thread.Sleep(50);
+
+                // * This thing is actually most important'
+                // ? Adding token here below is the way to out of this loop
+                // https://stackoverflow.com/questions/13695499/proper-way-to-implement-a-never-ending-task-timers-vs-task
+                // else could be:
+                // token.ThrowIfCancellationRequested();
+                // This way the cancellation will happen instantaneously if inside
+                // the Task.Delay, rather than having to wait for the Thread.Sleep to finish.
+                // await Task.Delay(TICK_LENGTH, cancelToken);
             }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            // }
+            // catch(Exception ex)
+            // {
+            //     throw ex;
+            // }
             // catch (TaskCanceledException)
             // {
             //     // TODO Hmm, is it oki? I kindof expect it to happen and whatevs
@@ -186,13 +193,13 @@ namespace TravelBox.Common
 
             Debug.Log($"out of loop");
             o_cancellationTokenSource?.Dispose();
-            // finally
-            // {
-            //     Debug.Log($"FINALLY");
-            //     o_cancellationTokenSource?.Dispose();
-            // }
 
             /* ---- ---- 🌠 */
+        }
+
+        private bool IsPastEndtime(out TimeSpan remainingTime)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion // Private Implementation
