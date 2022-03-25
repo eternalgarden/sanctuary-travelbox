@@ -11,67 +11,85 @@ using UnityEngine;
 
 namespace TravelBox.Common
 {
-    public class SanctuaryTimer : ITimingCapable
+    public class SanctuaryTimer : MonoBehaviour, ITimingCapable
     {
         /* ⭐ ---- ---- */
 
         const int TICK_LENGTH = 9;
 
-        DateTime v_startTime;
-        DateTime v_pauseTime;
+        DateTime _startTime;
+        DateTime _pauseTime;
+        TimeSpan _activeRunningLength;
+
 
         CancellationTokenSource o_cancellationTokenSource;
         CancellationTokenSource timerTokenSource;
 
         bool isRunning = false;
         bool isPaused = false;
-        
+
+        void Update()
+        {
+            // -------------
+
+            if (isRunning)
+            {
+                if (isPaused is false)
+                {
+                    TimeSpan totalTime = DateTime.UtcNow - _startTime;
+
+                    _activeRunningLength = totalTime;
+
+                    TimerTicked?.Invoke(totalTime);
+                }
+            }
+
+            // -------------
+        }
+
         //
         // ⛺ ─── Public Interface ───────────────────────────────────────────────────
         //
-        
+
         #region Public Interface
-        
+
         public event Action<TimeSpan> TimerTicked;
 
         public void StartTimer()
         {
             /* ⭐ ---- ---- */
 
-            Debug.Log($"blopp");
-            
-            
             if (isRunning)
             {
                 throw new Exception("Timer is already running.");
             }
 
-            v_startTime = DateTime.UtcNow;
+            _startTime = DateTime.UtcNow;
 
-            RunTimerClock();
+            this.enabled = true;
 
             isRunning = true;
 
             /* ---- ---- 🌠 */
         }
 
-        public void ToggleTimerPause()
+        public void ToggleTimerPause(out bool isPaused)
         {
             /* ⭐ ---- ---- */
 
-            if (isPaused)
+            if (this.isPaused)
             {
-                TimeSpan timeDifference = DateTime.UtcNow - v_pauseTime;
-                v_startTime += timeDifference;
-                RunTimerClock();
+                TimeSpan timeDifference = DateTime.UtcNow - _pauseTime;
+                _startTime += timeDifference;
             }
             else
             {
-                StopTimerClock();
-                v_pauseTime = DateTime.UtcNow;
+                _pauseTime = DateTime.UtcNow;
             }
 
-            isPaused = !isPaused;
+            this.isPaused = !this.isPaused;
+
+            isPaused = this.isPaused;
 
             /* ---- ---- 🌠 */
         }
@@ -80,93 +98,24 @@ namespace TravelBox.Common
         {
             /* ⭐ ---- ---- */
 
-            o_cancellationTokenSource.Cancel();
-            o_cancellationTokenSource = null;
+            if (isRunning)
+            {
+                TimerTicked?.Invoke(TimeSpan.Zero);
+            }
+
+            this.enabled = false;
             isPaused = false;
             isRunning = false;
 
             /* ---- ---- 🌠 */
         }
 
-        // * lol don't forget to dispose it
-        public void Dispose()
+        public TimeSpan GetRunningLength()
         {
-            /* ⭐ ---- ---- */
-            
-            o_cancellationTokenSource?.Cancel();
-            o_cancellationTokenSource = null;
-            
-            /* ---- ---- 🌠 */
+            return _activeRunningLength;
         }
 
-        
         #endregion // Public Interface
-        
-        //
-        // ⛺ ─── Private Implementation ───────────────────────────────────────────────────
-        //
-        
-        #region Private Implementation
-        
-        void RunTimerClock()
-        {
-            /* ⭐ ---- ---- */
-
-            o_cancellationTokenSource = new CancellationTokenSource();
-            
-            Task timerLoop = Task.Factory.StartNew(
-                action: async () => TimerLoop(o_cancellationTokenSource.Token),
-                cancellationToken: o_cancellationTokenSource.Token,
-                creationOptions: TaskCreationOptions.LongRunning,
-                scheduler: TaskScheduler.FromCurrentSynchronizationContext());
-            
-            /* ---- ---- 🌠 */
-        }
-
-        void StopTimerClock()
-        {
-            /* ⭐ ---- ---- */
-
-            o_cancellationTokenSource.Cancel();
-
-            /* ---- ---- 🌠 */
-        }
-
-        async void TimerLoop(CancellationToken cancelToken)
-        {
-            /* ⭐ ---- ---- */
-
-            try
-            {
-                while (true)
-                {
-                    TimeSpan totalTime = DateTime.UtcNow - v_startTime;
-
-                    TimerTicked.Invoke(totalTime);
-
-                    // * This thing is actually most important'
-                    // ? Adding token here below is the way to out of this loop
-                    // https://stackoverflow.com/questions/13695499/proper-way-to-implement-a-never-ending-task-timers-vs-task
-                    // else could be:
-                    // token.ThrowIfCancellationRequested();
-                    // This way the cancellation will happen instantaneously if inside
-                    // the Task.Delay, rather than having to wait for the Thread.Sleep to finish.
-                    await Task.Delay(TICK_LENGTH, cancelToken);
-                }
-            }
-            catch (TaskCanceledException) 
-            { 
-                // TODO Hmm, is it oki? I kindof expect it to happen and whatevs
-            }
-            finally
-            {
-                o_cancellationTokenSource?.Dispose();
-            }
-
-            /* ---- ---- 🌠 */
-        }
-        
-        #endregion // Private Implementation
 
         /* ---- ---- 🌠 */
     }

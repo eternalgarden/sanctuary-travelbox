@@ -6,13 +6,14 @@ ZZZzz /,`.-'`'    -.  ;-;;,_
 */
 using System;
 using TMPro;
+using UnityEngine;
 
 namespace TravelBox.Extensions
 {
     public static class TMProExtensions
     {
         // -------------
-    
+        
         public static int GetIntValue(this TMP_InputField inputField)
         {
             /* ⭐ ---- ---- */
@@ -25,6 +26,19 @@ namespace TravelBox.Extensions
             {
                 throw new Exception("Input field isn't of int type for gameobject: " + inputField.gameObject.name);
             }
+            
+            /* ---- ---- 🌠 */
+        }
+
+        // * Rich text information here
+        // * http://digitalnativestudios.com/textmeshpro/docs/rich-text/
+
+        public static string ColourTMProString(this string text, Color color)
+        {
+            /* ⭐ ---- ---- */
+            
+            string hex = ColorUtility.ToHtmlStringRGB(color);
+            return $"<color=#{hex}>{text}</color>";
             
             /* ---- ---- 🌠 */
         }

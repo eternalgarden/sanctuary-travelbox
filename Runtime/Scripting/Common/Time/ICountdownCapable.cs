@@ -8,7 +8,8 @@ namespace TravelBox.Common
         event Action<TimeSpan> OnCountdownTick;
 
         void RunCountdown(TimeSpan length);
-        void ToggleCountdownPause();
+        void ToggleCountdownPause(out bool currentState);
         void StopCountdown();
+        TimeSpan GetRunningLength();
     }
 }

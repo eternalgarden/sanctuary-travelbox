@@ -8,13 +8,14 @@ using System;
 
 namespace TravelBox.Common
 {
-    public interface ITimingCapable : IDisposable
+    public interface ITimingCapable
     {
         event Action<TimeSpan> TimerTicked;
 
         void StartTimer();
-        void ToggleTimerPause();
+        void ToggleTimerPause(out bool currentState);
         void StopTimer();
+        TimeSpan GetRunningLength();
     }
 }
 /* maria aurelia at 09 November 2021 🌊 */

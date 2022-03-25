@@ -11,37 +11,31 @@ namespace TravelBox.Common
     {
         // -------------
 
-        const int TICK_LENGTH = 10;
         CancellationTokenSource o_cancellationTokenSource;
+        TimeSpan _desiredCountdownLength;
+        TimeSpan _activeRunningLength;
         DateTime _endTime;
-        DateTime pauseTime;
+        DateTime _pauseTime;
         bool isRunning = false;
         bool isPaused = false;
 
         void Update()
         {
             // -------------
-            // 
-            
 
             if (isRunning)
             {
-            Debug.Log($"asdfasdf");
-
                 if (isPaused is false)
                 {
-            Debug.Log($"111111111111");
-
                     TimeSpan remainingTime = _endTime - DateTime.UtcNow;
 
                     if (remainingTime < TimeSpan.Zero)
                     {
-                        OnCountdownComplete?.Invoke();
+                        OnCountdownComplete.Invoke();
+                        StopCountdown();
                     }
                     else
                     {
-                        Debug.Log($"ooops");
-
                         OnCountdownTick?.Invoke(remainingTime);
                     }
                 }
@@ -64,9 +58,6 @@ namespace TravelBox.Common
         {
             /* ⭐ ---- ---- */
 
-            Debug.Log($"help");
-            
-
             if (isRunning)
             {
                 throw new Exception("Countdown is already running.");
@@ -74,32 +65,32 @@ namespace TravelBox.Common
 
             var start = DateTime.UtcNow; // Use UtcNow instead of Now
             _endTime = start.AddTicks(length.Ticks);
+            _desiredCountdownLength = length;
 
             this.enabled = true;
-
-            Debug.Log($"yuppp");
-
 
             isRunning = true;
 
             /* ---- ---- 🌠 */
         }
 
-        public void ToggleCountdownPause()
+        public void ToggleCountdownPause(out bool isPaused)
         {
             /* ⭐ ---- ---- */
 
-            if (isPaused)
+            if (this.isPaused)
             {
-                TimeSpan timeDifference = DateTime.UtcNow - pauseTime;
+                TimeSpan timeDifference = DateTime.UtcNow - _pauseTime;
                 _endTime += timeDifference;
             }
             else
             {
-                pauseTime = DateTime.UtcNow;
+                _pauseTime = DateTime.UtcNow;
             }
 
-            isPaused = !isPaused;
+            this.isPaused = !this.isPaused;
+
+            isPaused = this.isPaused;
 
             /* ---- ---- 🌠 */
         }
@@ -108,12 +99,14 @@ namespace TravelBox.Common
         {
             /* ⭐ ---- ---- */
 
+            if (isRunning)
+            {
+                OnCountdownTick?.Invoke(TimeSpan.Zero);
+            }
+
             isPaused = false;
             isRunning = false;
-
             this.enabled = false;
-
-            OnCountdownTick?.Invoke(TimeSpan.Zero);
 
             /* ---- ---- 🌠 */
         }
@@ -149,6 +142,8 @@ namespace TravelBox.Common
             while (true)
             {
                 TimeSpan remainingTime = _endTime - DateTime.UtcNow;
+
+                _activeRunningLength = _desiredCountdownLength - remainingTime;
 
                 Debug.Log($"COUN TDOWN LOOP TICK");
 
@@ -197,9 +192,13 @@ namespace TravelBox.Common
             /* ---- ---- 🌠 */
         }
 
-        private bool IsPastEndtime(out TimeSpan remainingTime)
+        public TimeSpan GetRunningLength()
         {
-            throw new NotImplementedException();
+            /* ⭐ ---- ---- */
+
+            return _activeRunningLength;
+
+            /* ---- ---- 🌠 */
         }
 
         #endregion // Private Implementation
