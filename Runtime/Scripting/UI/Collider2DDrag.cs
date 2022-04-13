@@ -24,16 +24,8 @@ namespace Sanctuary.Modules.UI
         float startPosX;
         float startPosY;
         bool isBeingHeld;
-        Collider2D collider;
 
-        void Awake()
-        {
-            // -------------
-
-            collider = GetComponent<Collider2D>();
-
-            // -------------
-        }
+        [SerializeField] Transform toMove;
 
         void Update()
         {
@@ -53,6 +45,7 @@ namespace Sanctuary.Modules.UI
             // -------------
         }
 
+        // * A collider on the same gameobject is required for this event to fire
         void OnMouseDown()
         {
             // -------------
@@ -73,6 +66,7 @@ namespace Sanctuary.Modules.UI
             // -------------
         }
 
+        // * A collider on the same gameobject is required for this event to fire
         void OnMouseUp()
         {
             // -------------
