@@ -25,8 +25,6 @@ namespace Sanctuary.Modules.UI
         float startPosY;
         bool isBeingHeld;
 
-        [SerializeField] Transform toMove;
-
         void Update()
         {
             // -------------

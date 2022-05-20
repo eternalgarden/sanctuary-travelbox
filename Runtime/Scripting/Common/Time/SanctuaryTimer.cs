@@ -21,10 +21,6 @@ namespace TravelBox.Common
         DateTime _pauseTime;
         TimeSpan _activeRunningLength;
 
-
-        CancellationTokenSource o_cancellationTokenSource;
-        CancellationTokenSource timerTokenSource;
-
         bool isRunning = false;
         bool isPaused = false;
 
