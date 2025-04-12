@@ -1,7 +1,7 @@
 {
-  "name": "com.sanctuary.travel-box",
-  "version": "0.2.2",
-  "displayName": "sanctuary-travel-box",
+  "name": "com.sanctuary.travelbox",
+  "version": "1.0.0",
+  "displayName": "sanctuary-travelbox",
   "description": "fun fun \ud83c\udfa0various addons and snippet",
   "samples": [
     {
@@ -17,6 +17,5 @@
     "name": "marai marai",
     "url": "https://www.spacejam.com/"
   },
-  "type": "library",
   "hideInEditor": false
 }
