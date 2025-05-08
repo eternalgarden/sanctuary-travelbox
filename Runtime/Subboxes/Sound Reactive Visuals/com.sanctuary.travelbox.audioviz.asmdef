@@ -2,7 +2,7 @@
     "name": "com.sanctuary.travelbox.audioviz",
     "rootNamespace": "",
     "references": [
-        "GUID:2f2b66b71062b664d8241d933507af35"
+        "com.sanctuary.travelbox.postprocessing.obsolete"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
